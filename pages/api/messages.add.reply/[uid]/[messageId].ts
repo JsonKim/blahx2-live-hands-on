@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import MessageCtrl from '@/controllers/message/message.controller';
 import { NextApiRequest, NextApiResponse } from 'next';
+import MessageCtrl from '@/controllers/message/message.controller';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;

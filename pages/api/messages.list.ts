@@ -1,17 +1,17 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import FirebaseAdmin from '@/models/firebase_admin';
 import { NextApiRequest, NextApiResponse } from 'next';
+import FirebaseAdmin from '@/models/firebase_admin';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
   console.info(method);
-  const { uid } = req.query
+  const { uid } = req.query;
   if (uid === undefined) {
     return res.status(400).send('uid가 없어요.');
   }
 
-  const userId = Array.isArray(uid) ? uid[0] : uid
+  const userId = Array.isArray(uid) ? uid[0] : uid;
   const colRef = FirebaseAdmin.getInstance().Firestore.collection('members').doc(userId).collection('messages');
   try {
     // 컬렉션 내 모든 문서 데이터를 읽음
