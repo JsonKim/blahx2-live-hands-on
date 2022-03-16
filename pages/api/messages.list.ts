@@ -6,11 +6,13 @@ import { NextApiRequest, NextApiResponse } from 'next';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
   console.info(method);
-  const { uid } = req.query as { uid: string | undefined };
+  const { uid } = req.query
   if (uid === undefined) {
     return res.status(400).send('uid가 없어요.');
   }
-  const colRef = FirebaseAdmin.getInstance().Firestore.collection('members').doc(uid).collection('messages');
+
+  const userId = Array.isArray(uid) ? uid[0] : uid
+  const colRef = FirebaseAdmin.getInstance().Firestore.collection('members').doc(userId).collection('messages');
   try {
     // 컬렉션 내 모든 문서 데이터를 읽음
     const colSnap = await colRef.get();
